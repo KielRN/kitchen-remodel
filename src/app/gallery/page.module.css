@@ -1,0 +1,29 @@
+.pageHeader {
+    background: var(--primary);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.pageHeader h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pageHeader p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.gallerySection {
+    padding: 4rem 0;
+}
+
+.galleryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}

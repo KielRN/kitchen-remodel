@@ -1,0 +1,166 @@
+.pageHeader {
+    background: var(--primary);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.pageHeader h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pageHeader p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.processSection {
+    padding: 6rem 0;
+    background: var(--accent);
+}
+
+.timelineContainer {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timelineLine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%);
+}
+
+.timelineItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.timelineMarker {
+    position: absolute;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transform: translateX(-50%);
+    z-index: 2;
+    border: 4px solid white;
+    box-shadow: 0 0 0 4px var(--accent);
+}
+
+.timelineContent {
+    width: 45%;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.left {
+    justify-content: flex-start;
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+.left .timelineContent::before {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 20px;
+    border-width: 10px 0 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent white;
+}
+
+.right .timelineContent::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 20px;
+    border-width: 10px 10px 10px 0;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+}
+
+.iconBox {
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.timelineContent h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-family: var(--font-heading);
+}
+
+.timelineContent p {
+    line-height: 1.6;
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+.ctaSection {
+    padding: 6rem 0;
+    text-align: center;
+    background: white;
+}
+
+.ctaSection h2 {
+    margin-bottom: 2rem;
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    .timelineLine {
+        left: 20px;
+    }
+
+    .timelineItem {
+        display: block;
+        padding-left: 60px;
+    }
+
+    .timelineMarker {
+        left: 20px;
+    }
+
+    .timelineContent {
+        width: 100%;
+    }
+
+    .left,
+    .right {
+        justify-content: unset;
+    }
+
+    .left .timelineContent::before,
+    .right .timelineContent::before {
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+        left: -10px;
+        right: auto;
+    }
+}

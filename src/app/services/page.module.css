@@ -1,0 +1,120 @@
+.pageHeader {
+    background: var(--primary);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.pageHeader h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pageHeader p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.servicesList {
+    padding: 4rem 0;
+}
+
+.serviceRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 6rem;
+    scroll-margin-top: 100px;
+}
+
+.serviceRow:nth-child(even) {
+    direction: rtl;
+}
+
+.serviceRow:nth-child(even) .serviceContent {
+    direction: ltr;
+}
+
+.serviceRow:last-child {
+    margin-bottom: 0;
+}
+
+.iconHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.iconHeader h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    font-family: var(--font-heading);
+    margin: 0;
+}
+
+.serviceDesc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.featureList {
+    list-style: none;
+    margin-bottom: 2.5rem;
+}
+
+.featureList li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.checkIcon {
+    color: var(--secondary);
+    flex-shrink: 0;
+}
+
+.serviceImagePlaceholder {
+    aspect-ratio: 4/3;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #f0f0f0;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.placeholderBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.ctaSection {
+    padding: 6rem 0;
+    text-align: center;
+    background: var(--accent);
+}
+
+.ctaSection h2 {
+    margin-bottom: 2rem;
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .serviceRow {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        direction: ltr !important;
+    }
+}

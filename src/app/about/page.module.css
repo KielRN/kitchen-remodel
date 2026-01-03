@@ -1,0 +1,131 @@
+.pageHeader {
+    background: var(--primary);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.pageHeader h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pageHeader p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.aboutContent {
+    padding: 6rem 0;
+}
+
+.splitLayout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.textCol h2 {
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.textCol p {
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: var(--foreground);
+    opacity: 0.9;
+}
+
+.textCol h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.valuesList {
+    list-style: none;
+}
+
+.valuesList li {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--secondary);
+}
+
+.imageWrapper {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.imageCaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    text-align: center;
+}
+
+.teamSection {
+    padding: 6rem 0;
+    background: var(--accent);
+    text-align: center;
+}
+
+.teamSection h2 {
+    color: var(--primary);
+    margin-bottom: 3rem;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+}
+
+.teamGrid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.teamCard {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    width: 250px;
+}
+
+.placeholderAvatar {
+    width: 120px;
+    height: 120px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+}
+
+.teamCard h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.role {
+    color: var(--secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .splitLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .imageCol {
+        order: -1;
+    }
+}

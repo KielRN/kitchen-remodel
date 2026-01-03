@@ -1,0 +1,35 @@
+.trustSection {
+    background: #f8fafc;
+    padding: 4rem 0;
+}
+
+.trustGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.trustItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.iconWrapper {
+    color: var(--secondary);
+    background: white;
+    padding: 0.75rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.content p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
