@@ -1,4 +1,4 @@
-
+"use client";
 
 import { useState } from 'react';
 import Button from './Button';
@@ -13,6 +13,7 @@ export default function ContactForm() {
         message: ''
     });
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData(prev => ({
@@ -27,12 +28,31 @@ export default function ContactForm() {
 
         // Simulate API call
         try {
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            // const res = await fetch('/api/contact', { ... }); 
-            // For now, just simulate success
+            // Send to local API route which proxies to the webhook
+            const submissionData = {
+                ...formData,
+                submittedAt: new Date().toISOString(),
+            };
+
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(submissionData),
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.error || 'Submission failed');
+            }
+
+            const data = await response.json();
+            setSuccessMessage(data.message);
             setStatus('success');
             setFormData({ name: '', email: '', phone: '', service: 'full-remodel', message: '' });
         } catch (error) {
+            console.error('Submission error:', error);
             setStatus('error');
         }
     };
@@ -42,7 +62,7 @@ export default function ContactForm() {
             <div className="success-message">
                 <CheckCircle size={48} className="icon-success" />
                 <h3>Message Sent!</h3>
-                <p>Thank you for reaching out. We will get back to you within 24 hours.</p>
+                <p>{successMessage || 'Thank you for reaching out. We will get back to you within 24 hours.'}</p>
                 <Button onClick={() => setStatus('idle')} variant="outline">Send Another Message</Button>
                 <style jsx>{`
                   .success-message {

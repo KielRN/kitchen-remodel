@@ -2,37 +2,58 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
     try {
-        const body = await request.json();
-        const { name, email, phone, service, message } = body;
+        const formData = await request.json();
 
-        // Server-side validation
-        if (!name || !email || !phone || !message) {
-            return NextResponse.json(
-                { error: 'Missing required fields' },
-                { status: 400 }
-            );
+        // 1. Validate Configuration
+        // Hardcoded for debugging as requested
+        const webhookUrl = "https://primary-production-f991a.up.railway.app/webhook/ed2db0f4-67ca-48af-9ab9-465734b51fbc";
+
+        // const webhookUrl = process.env.NEXT_PUBLIC_CONTACT_WEBHOOK;
+        if (!webhookUrl) {
+            console.error("Webhook URL not configured");
+            return NextResponse.json({ error: "Webhook URL not configured" }, { status: 500 });
         }
 
-        // In a real application, you would send an email here using Resend or Nodemailer
-        // Example:
-        // await resend.emails.send({
-        //   from: 'onboarding@resend.dev',
-        //   to: process.env.CONTACT_EMAIL || 'admin@example.com',
-        //   subject: `New Inquiry from ${name} - ${service}`,
-        //   html: `<p>Name: ${name}</p><p>Email: ${email}</p>...`
-        // });
+        console.log("Forwarding to webhook URL:", webhookUrl);
 
-        // Simulate delay
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // 2. Forward to External Webhook (n8n)
+        // Using GET as the webhook is configured for GET requests
+        const params = new URLSearchParams();
+        Object.entries(formData).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+                params.append(key, String(value));
+            }
+        });
 
-        console.log('Form submission received:', { name, email, service });
+        const response = await fetch(`${webhookUrl}?${params.toString()}`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+            }
+        });
 
-        return NextResponse.json({ success: true }, { status: 200 });
+        // 3. Handle Response
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Webhook failed with status: ${response.status}`, errorText);
+            return NextResponse.json({
+                error: `Webhook failed: ${response.status} ${response.statusText}`,
+                details: errorText
+            }, { status: 502 });
+        }
+
+        // 4. Return Webhook Response to Client
+        const responseData = await response.text();
+        try {
+            // Try parsing JSON if possible
+            return NextResponse.json(JSON.parse(responseData));
+        } catch {
+            // Fallback to text response
+            return new Response(responseData);
+        }
+
     } catch (error) {
-        console.error('API Error:', error);
-        return NextResponse.json(
-            { error: 'Internal Server Error' },
-            { status: 500 }
-        );
+        console.error("Internal server error:", error);
+        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }
